@@ -5,13 +5,64 @@ build-backend = "hatchling.build"
 [project]
 name = "bt_api_btc_markets"
 version = "0.1.0"
-description = "BTC Markets exchange plugin for bt_api"
+description = "BTC Markets exchange plugin for bt_api - Australian cryptocurrency exchange"
 readme = "README.md"
 requires-python = ">=3.9"
-dependencies = ["bt_api_base"]
+license = { text = "MIT" }
+authors = [
+    { name = "cloudQuant", email = "yunjinqi@gmail.com" }
+]
+keywords = [
+    "bt_api",
+    "btc_markets",
+    "btcmarkets",
+    "cryptocurrency",
+    "exchange",
+    "trading",
+    "api",
+    "crypto",
+    "australia",
+    "aud"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Office/Business :: Financial :: Investment",
+]
+dependencies = ["bt_api_base>=0.15.0"]
 
 [project.optional-dependencies]
-dev = ["pytest"]
+dev = ["pytest>=7.0", "ruff>=0.1.0"]
+all = ["bt_api_btc_markets[dev]"]
+
+[project.urls]
+Homepage = "https://github.com/cloudQuant/bt_api_btc_markets"
+Documentation = "https://bt-api-btc-markets.readthedocs.io/"
+Repository = "https://github.com/cloudQuant/bt_api_btc_markets"
+Issues = "https://github.com/cloudQuant/bt_api_btc_markets/issues"
+Changelog = "https://github.com/cloudQuant/bt_api_btc_markets/releases"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/bt_api_btc_markets"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
