@@ -23,7 +23,9 @@ class BtcMarketsBalanceData(BalanceData):
         self.symbol_name = symbol_name
         self.asset_type = asset_type
         self.balance_data: dict[str, Any] | list | None = (
-            balance_info if has_been_json_encoded and isinstance(balance_info, (dict, list)) else None
+            balance_info
+            if has_been_json_encoded and isinstance(balance_info, (dict, list))
+            else None
         )
         self.available: float | None = None
         self.locked: float | None = None

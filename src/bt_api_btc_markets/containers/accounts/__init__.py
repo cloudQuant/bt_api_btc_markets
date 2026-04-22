@@ -23,7 +23,9 @@ class BtcMarketsAccountData(AccountData):
         self.symbol_name = symbol_name
         self.asset_type = asset_type
         self.account_data: dict[str, Any] | list | None = (
-            account_info if has_been_json_encoded and isinstance(account_info, (dict, list)) else None
+            account_info
+            if has_been_json_encoded and isinstance(account_info, (dict, list))
+            else None
         )
         self.balances: list = []
         self.has_been_init_data = False

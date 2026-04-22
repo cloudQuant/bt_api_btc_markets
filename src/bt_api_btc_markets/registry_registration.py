@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 from bt_api_base.registry import ExchangeRegistry
-from bt_api_btc_markets.plugin import BtcMarketsPlugin
+
 from bt_api_btc_markets.feeds.live_btc_markets.spot import BtcMarketsRequestDataSpot
+from bt_api_btc_markets.plugin import BtcMarketsPlugin
 
 
 def register_btc_markets():

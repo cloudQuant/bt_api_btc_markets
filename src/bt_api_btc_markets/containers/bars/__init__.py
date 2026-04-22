@@ -45,7 +45,9 @@ class BtcMarketsBarData(BarData):
         if isinstance(self.bar_data, list) and len(self.bar_data) > 0:
             first = self.bar_data[0]
             if isinstance(first, dict):
-                self.open_time = from_dict_get_float(first, "timestamp") or from_dict_get_float(first, "time")
+                self.open_time = from_dict_get_float(first, "timestamp") or from_dict_get_float(
+                    first, "time",
+                )
                 self.open = from_dict_get_float(first, "open")
                 self.high = from_dict_get_float(first, "high")
                 self.low = from_dict_get_float(first, "low")

@@ -8,7 +8,6 @@ from bt_api_base._compat import Self
 from bt_api_base.containers.orders.order import OrderData
 from bt_api_base.functions.utils import from_dict_get_float, from_dict_get_string
 
-
 _STATUS_MAP = {
     "NEW": "NEW",
     "OPEN": "OPEN",
@@ -52,11 +51,15 @@ class BtcMarketsOrderData(OrderData):
 
         if isinstance(self.order_data, dict):
             data = self.order_data
-            self.order_id = from_dict_get_string(data, "id") or from_dict_get_string(data, "orderId")
+            self.order_id = from_dict_get_string(data, "id") or from_dict_get_string(
+                data, "orderId",
+            )
             self.side = from_dict_get_string(data, "side")
             self.order_type = from_dict_get_string(data, "type")
             self.price = from_dict_get_float(data, "price")
-            self.quantity = from_dict_get_float(data, "amount") or from_dict_get_float(data, "quantity")
+            self.quantity = from_dict_get_float(data, "amount") or from_dict_get_float(
+                data, "quantity",
+            )
             raw_status = from_dict_get_string(data, "status")
             self.status = _STATUS_MAP.get(raw_status, raw_status) if raw_status else None
 

@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Any, Optional
 
 from bt_api_base.feeds.capability import Capability
+
 from bt_api_btc_markets.feeds.live_btc_markets.request_base import BtcMarketsRequestData
 
 RequestParams = dict[str, Any]
@@ -30,7 +31,7 @@ class BtcMarketsRequestDataSpot(BtcMarketsRequestData):
         self.exchange_name = kwargs.get("exchange_name", "BTC_MARKETS___SPOT")
 
     def _get_tick(
-        self, symbol: str, extra_data: RequestExtraData | None = None, **kwargs: Any
+        self, symbol: str, extra_data: RequestExtraData | None = None, **kwargs: Any,
     ) -> RequestSpec:
         path = f"GET /v3/markets/{symbol}/ticker"
         if extra_data is None:
@@ -42,7 +43,7 @@ class BtcMarketsRequestDataSpot(BtcMarketsRequestData):
                 "asset_type": self.asset_type,
                 "exchange_name": self.exchange_name,
                 "normalize_function": self._get_tick_normalize_function,
-            }
+            },
         )
         return path, None, extra_data
 
@@ -54,13 +55,13 @@ class BtcMarketsRequestDataSpot(BtcMarketsRequestData):
         return [ticker], bool(ticker)
 
     def get_tick(
-        self, symbol: str, extra_data: RequestExtraData | None = None, **kwargs: Any
+        self, symbol: str, extra_data: RequestExtraData | None = None, **kwargs: Any,
     ) -> Any:
         path, params, extra_data = self._get_tick(symbol, extra_data, **kwargs)
         return self.request(path, params=params, extra_data=extra_data)
 
     def async_get_tick(
-        self, symbol: str, extra_data: RequestExtraData | None = None, **kwargs: Any
+        self, symbol: str, extra_data: RequestExtraData | None = None, **kwargs: Any,
     ) -> None:
         path, params, extra_data = self._get_tick(symbol, extra_data, **kwargs)
         self.submit(
@@ -85,7 +86,7 @@ class BtcMarketsRequestDataSpot(BtcMarketsRequestData):
                 "asset_type": self.asset_type,
                 "exchange_name": self.exchange_name,
                 "normalize_function": self._get_depth_normalize_function,
-            }
+            },
         )
         return path, None, extra_data
 
@@ -137,7 +138,7 @@ class BtcMarketsRequestDataSpot(BtcMarketsRequestData):
                 "asset_type": self.asset_type,
                 "exchange_name": self.exchange_name,
                 "normalize_function": self._get_kline_normalize_function,
-            }
+            },
         )
         interval = self._params.kline_periods.get(period, period)
         params = {"interval": interval, "limit": count}
@@ -176,7 +177,7 @@ class BtcMarketsRequestDataSpot(BtcMarketsRequestData):
         )
 
     def _get_exchange_info(
-        self, extra_data: RequestExtraData | None = None, **kwargs: Any
+        self, extra_data: RequestExtraData | None = None, **kwargs: Any,
     ) -> RequestSpec:
         path = "GET /v3/markets"
         if extra_data is None:
@@ -188,7 +189,7 @@ class BtcMarketsRequestDataSpot(BtcMarketsRequestData):
                 "asset_type": self.asset_type,
                 "exchange_name": self.exchange_name,
                 "normalize_function": self._get_exchange_info_normalize_function,
-            }
+            },
         )
         return path, {}, extra_data
 
@@ -204,7 +205,7 @@ class BtcMarketsRequestDataSpot(BtcMarketsRequestData):
         return self.request(path, params=params, extra_data=extra_data)
 
     def _get_account(
-        self, extra_data: RequestExtraData | None = None, **kwargs: Any
+        self, extra_data: RequestExtraData | None = None, **kwargs: Any,
     ) -> RequestSpec:
         path = "GET /v3/accounts/me/trading-fees"
         if extra_data is None:
@@ -216,7 +217,7 @@ class BtcMarketsRequestDataSpot(BtcMarketsRequestData):
                 "asset_type": self.asset_type,
                 "exchange_name": self.exchange_name,
                 "normalize_function": self._get_account_normalize_function,
-            }
+            },
         )
         return path, {}, extra_data
 
@@ -228,13 +229,13 @@ class BtcMarketsRequestDataSpot(BtcMarketsRequestData):
         return [account], bool(account)
 
     def get_account(
-        self, symbol: str = "ALL", extra_data: RequestExtraData | None = None, **kwargs: Any
+        self, symbol: str = "ALL", extra_data: RequestExtraData | None = None, **kwargs: Any,
     ) -> Any:
         path, params, extra_data = self._get_account(extra_data, **kwargs)
         return self.request(path, params=params, extra_data=extra_data)
 
     def async_get_account(
-        self, symbol: str = "ALL", extra_data: RequestExtraData | None = None, **kwargs: Any
+        self, symbol: str = "ALL", extra_data: RequestExtraData | None = None, **kwargs: Any,
     ) -> None:
         path, params, extra_data = self._get_account(extra_data, **kwargs)
         self.submit(
@@ -243,7 +244,7 @@ class BtcMarketsRequestDataSpot(BtcMarketsRequestData):
         )
 
     def _get_balance(
-        self, symbol: str | None = None, extra_data: RequestExtraData | None = None, **kwargs: Any
+        self, symbol: str | None = None, extra_data: RequestExtraData | None = None, **kwargs: Any,
     ) -> RequestSpec:
         path = "GET /v3/accounts/me/balances"
         if extra_data is None:
@@ -255,7 +256,7 @@ class BtcMarketsRequestDataSpot(BtcMarketsRequestData):
                 "asset_type": self.asset_type,
                 "exchange_name": self.exchange_name,
                 "normalize_function": self._get_balance_normalize_function,
-            }
+            },
         )
         return path, {}, extra_data
 
@@ -267,7 +268,7 @@ class BtcMarketsRequestDataSpot(BtcMarketsRequestData):
         return [balance], bool(balance)
 
     def get_balance(
-        self, symbol: str | None = None, extra_data: RequestExtraData | None = None, **kwargs: Any
+        self, symbol: str | None = None, extra_data: RequestExtraData | None = None, **kwargs: Any,
     ) -> Any:
         path, params, extra_data = self._get_balance(symbol, extra_data, **kwargs)
         return self.request(path, params=params, extra_data=extra_data)
@@ -293,7 +294,7 @@ class BtcMarketsRequestDataSpot(BtcMarketsRequestData):
                 "symbol_name": symbol,
                 "asset_type": self.asset_type,
                 "request_type": "make_order",
-            }
+            },
         )
         side = "Bid" if offset.upper() in ("BUY", "OPEN") else "Ask"
         params = {
@@ -349,7 +350,7 @@ class BtcMarketsRequestDataSpot(BtcMarketsRequestData):
                 "asset_type": self.asset_type,
                 "request_type": "cancel_order",
                 "order_id": order_id,
-            }
+            },
         )
         return path, {}, extra_data
 
@@ -380,7 +381,7 @@ class BtcMarketsRequestDataSpot(BtcMarketsRequestData):
                 "asset_type": self.asset_type,
                 "request_type": "query_order",
                 "order_id": order_id,
-            }
+            },
         )
         return path, {}, extra_data
 
@@ -395,7 +396,7 @@ class BtcMarketsRequestDataSpot(BtcMarketsRequestData):
         return self.request(path, params=params, extra_data=extra_data)
 
     def _get_open_orders(
-        self, symbol: str | None = None, extra_data: RequestExtraData | None = None, **kwargs: Any
+        self, symbol: str | None = None, extra_data: RequestExtraData | None = None, **kwargs: Any,
     ) -> RequestSpec:
         path = "GET /v3/orders"
         if extra_data is None:
@@ -406,7 +407,7 @@ class BtcMarketsRequestDataSpot(BtcMarketsRequestData):
                 "symbol_name": symbol or "",
                 "asset_type": self.asset_type,
                 "request_type": "get_open_orders",
-            }
+            },
         )
         params = {"status": "open"}
         if symbol:
@@ -414,7 +415,7 @@ class BtcMarketsRequestDataSpot(BtcMarketsRequestData):
         return path, params, extra_data
 
     def get_open_orders(
-        self, symbol: str | None = None, extra_data: RequestExtraData | None = None, **kwargs: Any
+        self, symbol: str | None = None, extra_data: RequestExtraData | None = None, **kwargs: Any,
     ) -> Any:
         path, params, extra_data = self._get_open_orders(symbol, extra_data, **kwargs)
         return self.request(path, params=params, extra_data=extra_data)
