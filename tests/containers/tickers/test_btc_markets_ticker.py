@@ -23,7 +23,7 @@ class TestBtcMarketsRequestTickerData:
         """Test init_data with ticker info."""
         data = {"lastPrice": "50000.0", "bid": "49990.0", "ask": "50010.0"}
         ticker = BtcMarketsRequestTickerData(
-            data, symbol_name="BTC-AUD", asset_type="SPOT", has_been_json_encoded=True
+            data, symbol_name="BTC-AUD", asset_type="SPOT", has_been_json_encoded=True,
         )
         ticker.init_data()
 
@@ -32,7 +32,7 @@ class TestBtcMarketsRequestTickerData:
     def test_get_all_data(self):
         """Test get_all_data - base class raises NotImplementedError."""
         ticker = BtcMarketsRequestTickerData(
-            {}, symbol_name="BTC-AUD", asset_type="SPOT", has_been_json_encoded=True
+            {}, symbol_name="BTC-AUD", asset_type="SPOT", has_been_json_encoded=True,
         )
         with pytest.raises(NotImplementedError):
             ticker.get_all_data()
@@ -40,7 +40,7 @@ class TestBtcMarketsRequestTickerData:
     def test_str_representation(self):
         """Test __str__ method - base class raises NotImplementedError."""
         ticker = BtcMarketsRequestTickerData(
-            {}, symbol_name="BTC-AUD", asset_type="SPOT", has_been_json_encoded=True
+            {}, symbol_name="BTC-AUD", asset_type="SPOT", has_been_json_encoded=True,
         )
         with pytest.raises(NotImplementedError):
             str(ticker)
