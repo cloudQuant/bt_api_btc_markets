@@ -52,13 +52,15 @@ class BtcMarketsOrderData(OrderData):
         if isinstance(self.order_data, dict):
             data = self.order_data
             self.order_id = from_dict_get_string(data, "id") or from_dict_get_string(
-                data, "orderId",
+                data,
+                "orderId",
             )
             self.side = from_dict_get_string(data, "side")
             self.order_type = from_dict_get_string(data, "type")
             self.price = from_dict_get_float(data, "price")
             self.quantity = from_dict_get_float(data, "amount") or from_dict_get_float(
-                data, "quantity",
+                data,
+                "quantity",
             )
             raw_status = from_dict_get_string(data, "status")
             self.status = _STATUS_MAP.get(raw_status, raw_status) if raw_status else None

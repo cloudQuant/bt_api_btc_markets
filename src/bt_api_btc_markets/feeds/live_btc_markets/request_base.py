@@ -51,7 +51,11 @@ class BtcMarketsRequestData(Feed):
         return base64.b64encode(signature).decode()
 
     def _get_headers(
-        self, method: str, request_path: str, params: dict = None, body: dict = None,
+        self,
+        method: str,
+        request_path: str,
+        params: dict = None,
+        body: dict = None,
     ) -> dict:
         nonce = str(int(time.time() * 1000))
         body_str = ""
@@ -67,7 +71,12 @@ class BtcMarketsRequestData(Feed):
         return headers
 
     def request(
-        self, path: str, params=None, body=None, extra_data=None, timeout=10,
+        self,
+        path: str,
+        params=None,
+        body=None,
+        extra_data=None,
+        timeout=10,
     ) -> RequestData:
         method = path.split()[0] if " " in path else "GET"
         request_path = path.split()[1] if " " in path else path
@@ -90,7 +99,12 @@ class BtcMarketsRequestData(Feed):
             raise
 
     async def async_request(
-        self, path: str, params=None, body=None, extra_data=None, timeout=5,
+        self,
+        path: str,
+        params=None,
+        body=None,
+        extra_data=None,
+        timeout=5,
     ) -> RequestData:
         method = path.split()[0] if " " in path else "GET"
         request_path = path.split()[1] if " " in path else path
